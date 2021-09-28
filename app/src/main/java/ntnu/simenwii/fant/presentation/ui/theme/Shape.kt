@@ -1,4 +1,4 @@
-package ntnu.simenwii.fant.ui.theme
+package ntnu.simenwii.fant.presentation.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
