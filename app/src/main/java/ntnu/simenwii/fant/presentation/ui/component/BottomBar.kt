@@ -1,7 +1,6 @@
-package ntnu.simenwii.fant
+package ntnu.simenwii.fant.presentation.ui.component
 
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -11,22 +10,20 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import ntnu.simenwii.fant.R
 
 /**
  * Bottom navigation bar of the app.
  * Controls which part of the app is active.
  */
-@Preview
 @Composable
-fun BottomBar() {
+fun BottomBar(navController: NavController) {
     val selectedItem = remember { mutableStateOf("marketplace") }
     BottomNavigation() {
         BottomNavigationItem(
-            label = {
-                Text("Marketplace")
-            },
+            label = { Text("Home") },
             icon = {
                 Icon(
                     modifier = Modifier.height(25.dp),
@@ -34,44 +31,47 @@ fun BottomBar() {
                     contentDescription = "House"
                 )
             },
-            selected = selectedItem.value == "marketplace",
+            selected = selectedItem.value == "home",
             onClick = {
-                selectedItem.value = "marketplace"
-                println("Clicked nav item")
-            }
+                if (selectedItem.value != "home") {
+                    selectedItem.value = "home"
+                    navController.navigate("home")
+                }
+            },
+
         )
         BottomNavigationItem(
-            label = {
-                Text("Home")
-            },
+            label = { Text("Marketplace") },
             icon = {
                 Icon(
                     modifier = Modifier.height(25.dp),
-                    painter = painterResource(R.drawable.ic_house),
-                    contentDescription = "House"
+                    painter = painterResource(R.drawable.ic_marketplace),
+                    contentDescription = "Marketplace"
                 )
             },
             selected = selectedItem.value == "marketplace",
             onClick = {
-                selectedItem.value = "marketplace"
-                println("Clicked nav item")
+                if (selectedItem.value != "marketplace") {
+                    selectedItem.value = "marketplace"
+                    navController.navigate("marketplace")
+                }
             }
         )
         BottomNavigationItem(
-            label = {
-                Text("Profile")
-            },
+            label = { Text("Profile") },
             icon = {
                 Icon(
                     modifier = Modifier.height(25.dp),
-                    painter = painterResource(R.drawable.ic_house),
-                    contentDescription = "House"
+                    painter = painterResource(R.drawable.ic_profile),
+                    contentDescription = "Profile"
                 )
             },
             selected = selectedItem.value == "profile",
             onClick = {
-                selectedItem.value = "profile"
-                println("Clicked nav item")
+                if (selectedItem.value != "profile") {
+                    selectedItem.value = "profile"
+                    navController.navigate("login")
+                }
             }
         )
     }
